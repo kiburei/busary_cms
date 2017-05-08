@@ -1,0 +1,32 @@
+<%= form_for(beneficiary) do |f| %>
+  <% if beneficiary.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(beneficiary.errors.count, "error") %> prohibited this beneficiary from being saved:</h2>
+
+      <ul>
+      <% beneficiary.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :school %>
+    <%= f.text_field :school %>
+  </div>
+
+  <div class="field">
+    <%= f.label :reg_no %>
+    <%= f.text_field :reg_no %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
