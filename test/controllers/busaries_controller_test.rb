@@ -17,7 +17,7 @@ class BusariesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create busary" do
     assert_difference('Busary.count') do
-      post busaries_url, params: { busary: { beneficiary: @busary.beneficiary, institute: @busary.institute, references: @busary.references, references: @busary.references } }
+      post busaries_url, params: { busary: {  } }
     end
 
     assert_redirected_to busary_url(Busary.last)
@@ -34,7 +34,7 @@ class BusariesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update busary" do
-    patch busary_url(@busary), params: { busary: { beneficiary: @busary.beneficiary, institute: @busary.institute, references: @busary.references, references: @busary.references } }
+    patch busary_url(@busary), params: { busary: {  } }
     assert_redirected_to busary_url(@busary)
   end
 

@@ -1,0 +1,2 @@
+class Busary < ApplicationRecord
+end
