@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Busaries</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Beneficiary</th>
+      <th>References</th>
+      <th>Institute</th>
+      <th>References</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @busaries.each do |busary| %>
+      <tr>
+        <td><%= busary.beneficiary %></td>
+        <td><%= busary.references %></td>
+        <td><%= busary.institute %></td>
+        <td><%= busary.references %></td>
+        <td><%= link_to 'Show', busary %></td>
+        <td><%= link_to 'Edit', edit_busary_path(busary) %></td>
+        <td><%= link_to 'Destroy', busary, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Busary', new_busary_path %>

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :busaries
+  ActiveAdmin.routes(self)
   resources :institutes
   resources :beneficiaries
   resources :parents
