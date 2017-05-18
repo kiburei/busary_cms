@@ -7,13 +7,30 @@
 
 <p>
   <strong>School:</strong>
-  <%= @beneficiary.school %>
+  <%= Institute.find(@beneficiary.institute_id).name %>
 </p>
 
 <p>
   <strong>Reg no:</strong>
   <%= @beneficiary.reg_no %>
 </p>
+<p>
+  <strong>Parent/Guardian</strong>
+  <%= @beneficiary.parent.name %>: <%= @beneficiary.parent.phone %>
+</p>
+<p>
+  <strong>Number of busaries received:</strong>
+  <%= @beneficiary.busaries.count %>
+  <strong>Total Amount:</strong>
+    <% total = [] %>
+    <% Busary.where(beneficiary_id: @beneficiary.id).each do |amount| %>
+    <% total << amount.amount %>
+    <% sum = total.map(&:to_i).reduce(0, :+) %>
+      <% if amount == Busary.where(beneficiary_id: @beneficiary.id).last %>
+        <%= number_to_currency(sum, :unit => "Ksh") %>
+      <% end %>
+    <% end %>
+</p>
 
-<%= link_to 'Edit', edit_beneficiary_path(@beneficiary) %> |
+<!-- # <%= link_to 'Edit', edit_beneficiary_path(@beneficiary) %> | -->
 <%= link_to 'Back', beneficiaries_path %>

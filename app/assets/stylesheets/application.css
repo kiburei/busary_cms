@@ -13,3 +13,25 @@
  *= require_tree .
  *= require_self
  */
+.live-feed {
+  padding: 10px;
+  background-color: grey;
+  font-size: 25px;
+  text-align: center;
+  color: white;
+}
+#feed1 {
+  float: left;
+}
+
+#feed3{
+  float: right;
+}
+
+label {
+  background-color: green;
+  color: white;
+  text-align: center;
+  padding: 5px;
+  border-radius: 10px;
+}

@@ -1,25 +1,74 @@
-<p id="notice"><%= notice %></p>
+  <p id="notice"><%= notice %></p>
 
-<h1>Busaries</h1>
+<h1>Busaries for <%= Beneficiary.find(@busaries.first.beneficiary_id).name %></h1>
 
 <table>
   <thead>
     <tr>
-      <th colspan="3"></th>
+      <th colspan="">Amount</th>
+      <th colspan="">Collect Date</th>
+      <th colspan="">Recieved</th>
     </tr>
   </thead>
 
   <tbody>
     <% @busaries.each do |busary| %>
       <tr>
-        <td><%= link_to 'Show', busary %></td>
-        <td><%= link_to 'Edit', edit_busary_path(busary) %></td>
-        <td><%= link_to 'Destroy', busary, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= number_to_currency(busary.amount, :unit => 'Ksh') %></td>
+        <td>
+            <% if busary.issue_date? %>
+                  <%= busary.issue_date %>
+
+            <% else %>
+                <%= form_for(busary) do |f| %>
+                <% if busary.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(busary.errors.count, "error") %> prohibited this busary from being saved:</h2>
+
+                  <ul>
+                    <% busary.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+                <% end %>
+                <div class="">
+                  <%= f.date_field :issue_date %>
+                </div>
+                <div class="actions">
+                  <%= f.submit %>
+                </div>
+                <% end %>
+            <% end %>
+        </td>
+        <td>
+          <% if busary.status == false %>
+                <%= form_for(busary) do |f| %>
+                  <% if busary.errors.any? %>
+                    <div id="error_explanation">
+                      <h2><%= pluralize(busary.errors.count, "error") %> prohibited this busary from being saved:</h2>
+
+                      <ul>
+                      <% busary.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                      <% end %>
+                      </ul>
+                    </div>
+                  <% end %>
+                  <div class="">
+                    <%= f.check_box :status %>
+                  </div>
+                  <div class="actions">
+                    <%= f.submit %>
+                  </div>
+                <% end %>
+          <% else %>
+          <label>Paid</label>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Busary', new_busary_path %>

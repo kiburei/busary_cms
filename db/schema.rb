@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170509090029) do
+ActiveRecord::Schema.define(version: 20170516170300) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -33,17 +33,21 @@ ActiveRecord::Schema.define(version: 20170509090029) do
     t.datetime "updated_at",   null: false
     t.integer  "institute_id"
     t.integer  "parent_id"
-    t.integer  "busary_id"
-    t.integer  "no_busaries"
-    t.index ["busary_id"], name: "index_beneficiaries_on_busary_id"
+    t.string   "year"
     t.index ["institute_id"], name: "index_beneficiaries_on_institute_id"
     t.index ["parent_id"], name: "index_beneficiaries_on_parent_id"
   end
 
   create_table "busaries", force: :cascade do |t|
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-    t.decimal  "amount",     precision: 8, scale: 2
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.decimal  "amount",         precision: 8, scale: 2
+    t.integer  "beneficiary_id"
+    t.integer  "institute_id"
+    t.boolean  "status"
+    t.date     "issue_date"
+    t.index ["beneficiary_id"], name: "index_busaries_on_beneficiary_id"
+    t.index ["institute_id"], name: "index_busaries_on_institute_id"
   end
 
   create_table "institutes", force: :cascade do |t|
@@ -52,9 +56,6 @@ ActiveRecord::Schema.define(version: 20170509090029) do
     t.string   "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "busary_id"
-    t.string   "type"
-    t.index ["busary_id"], name: "index_institutes_on_busary_id"
   end
 
   create_table "parents", force: :cascade do |t|

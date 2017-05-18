@@ -7,6 +7,28 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+  <header>
+    <h1><%= link_to 'Juja Constituency NG CDF Office', root_path %></h1>
+
+    <div class="live-feed">
+      <span id="feed1">Total Busaries Issued: <%= Busary.all.count %></span>
+      <span id="feed2">
+        Total Amount:
+          <% total = [] %>
+          <% Busary.where(status: true).each do |amount| %>
+          <% total << amount.amount %>
+          <% sum = total.map(&:to_i).reduce(0, :+) %>
+            <% if amount == Busary.where(status: true).last %>
+              <%= number_to_currency(sum, :unit => "Ksh") %>
+            <% end %>
+          <% end %>
+      </span>
+      <span id=feed3>
+        Total Institutes: <%= Institute.all.count %>
+      </span>
+    </div>
+
+  </header>
 
   <body>
     <%= yield %>

@@ -1,8 +1,8 @@
-ActiveAdmin.register Institute do
+ActiveAdmin.register Busary do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
-permit_params :name, :address, :phone
+permit_params :amount, :institute_id, :beneficiary_id, :status, :issue_date
 #
 # or
 #

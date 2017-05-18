@@ -10,6 +10,7 @@ class InstitutesController < ApplicationController
   # GET /institutes/1
   # GET /institutes/1.json
   def show
+    @beneficiaries = Beneficiary.where(institute_id: params[:id])
   end
 
   # GET /institutes/new
